@@ -8,7 +8,7 @@ if (process.env.NODE_ENV !== 'development') {
   console.warn = () => {};
 }
 
-// import '@/backend'; // Load backend;
+import '@/backend'; // Load backend;
 
 Menu.setApplicationMenu(null);
 
