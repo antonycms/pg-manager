@@ -1,6 +1,7 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
 import VuexPersist from 'vuex-persist';
+import { v4 as uuidv4 } from 'uuid';
 
 Vue.use(Vuex);
 
@@ -23,6 +24,20 @@ export default new Vuex.Store({
       state.actualDatabase = data;
     },
   },
-  actions: {},
+  actions: {
+    saveNewDatabase(context, data) {
+      const database = { ...data, id: uuidv4() };
+
+      context.commit('SET_DATABASES', [...context.state.databases, database]);
+    },
+
+    removeDatabase(context, databaseID) {
+      const newArrDatabases = context.state.databases.filter(
+        db => db.id !== databaseID,
+      );
+
+      context.commit('SET_DATABASES', newArrDatabases);
+    },
+  },
   modules: {},
 });

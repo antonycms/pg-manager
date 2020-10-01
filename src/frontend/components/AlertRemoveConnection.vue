@@ -49,7 +49,7 @@ export default {
       required: true,
     },
     connectionID: {
-      type: Number,
+      type: String,
       required: true,
     },
   },
@@ -66,6 +66,8 @@ export default {
         connectionID: this.connectionID,
         connectionName: this.connectionName,
       });
+
+      this.dialog = false;
     },
   },
 };

@@ -197,6 +197,11 @@ export default {
         return;
       }
 
+      this.$store.dispatch('saveNewDatabase', {
+        ...this.connectionConfig,
+        connectionName: this.connectionName,
+      });
+
       this.handleResetConnectionFormData();
     },
   },

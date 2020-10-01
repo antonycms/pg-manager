@@ -20,7 +20,7 @@
           <CardConnection
             :connectionName="connection.connectionName"
             :connectionID="connection.id"
-            :user="connection.user"
+            :username="connection.username"
             :host="connection.host"
             :port="connection.port"
           />
@@ -38,38 +38,12 @@ export default {
   components: {
     CardConnection,
   },
-  data: () => ({
-    connections: [
-      {
-        id: 1,
-        connectionName: 'Conexao 1',
-        user: 'Usuário',
-        host: 'localhost',
-        port: 5432,
-      },
-      {
-        id: 2,
-        connectionName: 'Conexao 1',
-        user: 'Usuário',
-        host: 'localhost',
-        port: 5432,
-      },
-      {
-        id: 3,
-        connectionName: 'Conexao 1',
-        user: 'Usuário',
-        host: 'localhost',
-        port: 5432,
-      },
-      {
-        id: 4,
-        connectionName: 'Conexao 1',
-        user: 'Usuário',
-        host: 'localhost',
-        port: 5432,
-      },
-    ],
-  }),
+
+  computed: {
+    connections() {
+      return this.$store.state.databases;
+    },
+  },
 };
 </script>
 

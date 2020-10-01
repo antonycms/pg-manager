@@ -10,6 +10,7 @@
       <AlertRemoveConnection
         :connectionID="connectionID"
         :connectionName="connectionName"
+        @remove_connection="data => removeConnection(data)"
       />
     </v-app-bar>
 
@@ -18,7 +19,7 @@
 
       <div class="text--primary"><strong>Porta:</strong> {{ port }}</div>
 
-      <div class="text--primary"><strong>Usuário:</strong> {{ user }}</div>
+      <div class="text--primary"><strong>Usuário:</strong> {{ username }}</div>
     </v-card-text>
 
     <v-card-actions>
@@ -40,14 +41,14 @@ export default {
 
   props: {
     connectionID: {
-      type: Number,
+      type: String,
       required: true,
     },
     connectionName: {
       type: String,
       required: true,
     },
-    user: {
+    username: {
       type: String,
       required: true,
     },
@@ -58,6 +59,13 @@ export default {
     port: {
       type: Number,
       required: true,
+    },
+  },
+
+  methods: {
+    removeConnection(data) {
+      const { connectionID } = data;
+      this.$store.dispatch('removeDatabase', connectionID);
     },
   },
 };
