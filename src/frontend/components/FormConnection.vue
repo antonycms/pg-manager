@@ -2,7 +2,7 @@
   <div>
     <v-dialog v-model="dialog" persistent max-width="600px">
       <template v-slot:activator="{ on, attrs }">
-        <v-btn color="green" rounded dark v-bind="attrs" v-on="on">
+        <v-btn color="primary" rounded dark v-bind="attrs" v-on="on">
           Adicionar Conexão
         </v-btn>
       </template>

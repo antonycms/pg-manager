@@ -1,14 +1,10 @@
 <template>
   <div class="text-center">
     <v-dialog v-model="dialog" hide-overlay persistent width="300">
-      <v-card color="primary" dark>
-        <v-card-text>
+      <v-card>
+        <v-card-text draggable="false">
           {{ loadingMessage }}
-          <v-progress-linear
-            indeterminate
-            color="white"
-            class="mb-0"
-          ></v-progress-linear>
+          <v-progress-linear indeterminate class="mb-0"></v-progress-linear>
         </v-card-text>
       </v-card>
     </v-dialog>

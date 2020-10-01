@@ -28,9 +28,8 @@
       </v-btn>
     </v-card-actions>
 
-    <ModalAlert
-      modalTitle="Erro ao estabelecer a conexão com o banco de dados!"
-      modalMessage="Ocorreu um erro ao tentar estabelecer a conexão com o banco de dados."
+    <ModalAlertBottom
+      modalMessage="Ocorreu um erro ao tentar estabelecer a conexão com o banco de dados!"
       :openModal="openModalErrorConnection"
       @close_alert_modal="openModalErrorConnection = false"
     />
@@ -39,14 +38,14 @@
 
 <script>
 import AlertRemoveConnection from '@/frontend/components/AlertRemoveConnection';
-import ModalAlert from '@/frontend/components/ModalAlert';
+import ModalAlertBottom from '@/frontend/components/ModalAlertBottom';
 import callBackend from '../utils/callBackend';
 
 export default {
   name: 'CardConnection',
   components: {
     AlertRemoveConnection,
-    ModalAlert,
+    ModalAlertBottom,
   },
 
   props: {
