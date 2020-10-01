@@ -187,8 +187,9 @@ export default {
 
     async handleConnection() {
       this.alert = false;
+
       const status = await callBackend({
-        eventName: 'core/defineConnection',
+        eventName: 'core/testConnection',
         data: this.connectionConfig,
       });
 

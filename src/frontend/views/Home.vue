@@ -20,28 +20,50 @@
           <CardConnection
             :connectionName="connection.connectionName"
             :connectionID="connection.id"
+            :database="connection.database"
             :username="connection.username"
+            :password="connection.password"
             :host="connection.host"
             :port="connection.port"
+            @db_connecting="promise => showModalConnecting(promise)"
           />
         </v-col>
       </v-row>
+
+      <ModalLoading
+        :openModal="openModal"
+        loadingMessage="Conectando a base de dados..."
+      />
     </v-container>
   </div>
 </template>
 
 <script>
 import CardConnection from '@/frontend/components/CardConnection';
+import ModalLoading from '@/frontend/components/ModalLoading';
 
 export default {
   name: 'Home',
   components: {
     CardConnection,
+    ModalLoading,
   },
 
   computed: {
     connections() {
       return this.$store.state.databases;
+    },
+  },
+
+  data: () => ({
+    openModal: false,
+  }),
+
+  methods: {
+    async showModalConnecting(promise) {
+      this.openModal = true;
+      await promise;
+      this.openModal = false;
     },
   },
 };

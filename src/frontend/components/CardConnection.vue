@@ -23,7 +23,7 @@
     </v-card-text>
 
     <v-card-actions>
-      <v-btn text color="deep-purple accent-4">
+      <v-btn @click="handleConnection" text color="deep-purple accent-4">
         Conectar
       </v-btn>
     </v-card-actions>
@@ -32,6 +32,7 @@
 
 <script>
 import AlertRemoveConnection from '@/frontend/components/AlertRemoveConnection';
+import callBackend from '../utils/callBackend';
 
 export default {
   name: 'CardConnection',
@@ -48,7 +49,15 @@ export default {
       type: String,
       required: true,
     },
+    database: {
+      type: String,
+      required: true,
+    },
     username: {
+      type: String,
+      required: true,
+    },
+    password: {
       type: String,
       required: true,
     },
@@ -66,6 +75,30 @@ export default {
     removeConnection(data) {
       const { connectionID } = data;
       this.$store.dispatch('removeDatabase', connectionID);
+    },
+
+    async handleConnection() {
+      const configDB = {
+        database: this.database,
+        port: this.port,
+        host: this.host,
+        username: this.username,
+        password: this.password,
+      };
+
+      const promise = callBackend({
+        eventName: 'core/defineConnection',
+        data: configDB,
+      });
+
+      this.$emit('db_connecting', promise);
+
+      const status = await promise;
+      console.log(status, configDB);
+
+      // if (!status) {
+
+      // }
     },
   },
 };
