@@ -174,6 +174,7 @@ export default {
       this.alert = false;
       this.dialog = false;
       this.testStatus = null;
+      this.connectionName = '';
 
       this.connectionConfig = {
         host: '',
