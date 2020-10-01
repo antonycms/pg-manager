@@ -15,6 +15,7 @@ export default new Vuex.Store({
   state: {
     databases: [],
     actualDatabase: null,
+    active_theme: 'LIGHT',
   },
   mutations: {
     SET_DATABASES(state, data) {
@@ -22,6 +23,14 @@ export default new Vuex.Store({
     },
     SET_ACTUAL_DATABASE(state, data) {
       state.actualDatabase = data;
+    },
+    SET_ACTIVE_THEME(state, dark) {
+      if (dark) {
+        state.active_theme = 'DARK';
+        return;
+      }
+
+      state.active_theme = 'LIGHT';
     },
   },
   actions: {

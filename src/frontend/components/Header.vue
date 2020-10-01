@@ -1,5 +1,5 @@
 <template>
-  <v-app-bar elevation="3" app color="white" dark>
+  <v-app-bar elevation="0" app white>
     <div class="d-flex align-center">
       <v-img
         alt="Vuetify Logo"
@@ -10,8 +10,8 @@
         width="40"
       />
 
-      <span class="black--text">
-        Logo
+      <span>
+        PG Manager
       </span>
     </div>
 

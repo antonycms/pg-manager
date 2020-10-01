@@ -2,14 +2,7 @@
   <div>
     <v-dialog v-model="dialog" persistent max-width="400">
       <template v-slot:activator="{ on, attrs }">
-        <v-btn
-          max-width="35"
-          max-height="35"
-          color="black"
-          icon
-          v-bind="attrs"
-          v-on="on"
-        >
+        <v-btn max-width="35" max-height="35" icon v-bind="attrs" v-on="on">
           <v-icon>mdi-window-close</v-icon>
         </v-btn>
       </template>

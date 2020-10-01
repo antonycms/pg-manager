@@ -1,7 +1,7 @@
 <template>
   <v-card shaped class="mx-auto" max-width="344">
     <v-app-bar flat color="rgba(0, 0, 0, 0)" max-height="50">
-      <v-toolbar-title class="title black--text pl-0">
+      <v-toolbar-title class="title pl-0">
         {{ connectionName }}
       </v-toolbar-title>
 
@@ -110,7 +110,10 @@ export default {
 
       if (!status) {
         this.openModalErrorConnection = true;
+        return;
       }
+
+      this.$store.commit('SET_ACTUAL_DATABASE', configDB);
     },
   },
 };
