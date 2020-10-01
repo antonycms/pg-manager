@@ -1,7 +1,7 @@
 <template>
   <div class="text-center">
     <v-dialog v-model="dialog" hide-overlay persistent width="300">
-      <v-card color="grey" dark>
+      <v-card color="primary" dark>
         <v-card-text>
           {{ loadingMessage }}
           <v-progress-linear
@@ -34,7 +34,7 @@ export default {
   },
 
   watch: {
-    openModal(val) {
+    openModal() {
       this.dialog = this.openModal;
     },
   },

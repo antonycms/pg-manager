@@ -142,11 +142,11 @@ export default {
     connectionName: '',
 
     connectionConfig: {
-      host: 'localhost',
-      port: 5433,
-      database: 'postgres',
-      username: 'docker',
-      password: 'docker',
+      host: '',
+      port: undefined,
+      database: '',
+      username: '',
+      password: '',
     },
 
     testStatus: null,

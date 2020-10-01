@@ -23,21 +23,30 @@
     </v-card-text>
 
     <v-card-actions>
-      <v-btn @click="handleConnection" text color="deep-purple accent-4">
+      <v-btn @click="handleConnection" text color="primary accent-4">
         Conectar
       </v-btn>
     </v-card-actions>
+
+    <ModalAlert
+      modalTitle="Erro ao estabelecer a conexão com o banco de dados!"
+      modalMessage="Ocorreu um erro ao tentar estabelecer a conexão com o banco de dados."
+      :openModal="openModalErrorConnection"
+      @close_alert_modal="openModalErrorConnection = false"
+    />
   </v-card>
 </template>
 
 <script>
 import AlertRemoveConnection from '@/frontend/components/AlertRemoveConnection';
+import ModalAlert from '@/frontend/components/ModalAlert';
 import callBackend from '../utils/callBackend';
 
 export default {
   name: 'CardConnection',
   components: {
     AlertRemoveConnection,
+    ModalAlert,
   },
 
   props: {
@@ -71,6 +80,10 @@ export default {
     },
   },
 
+  data: () => ({
+    openModalErrorConnection: false,
+  }),
+
   methods: {
     removeConnection(data) {
       const { connectionID } = data;
@@ -94,11 +107,10 @@ export default {
       this.$emit('db_connecting', promise);
 
       const status = await promise;
-      console.log(status, configDB);
 
-      // if (!status) {
-
-      // }
+      if (!status) {
+        this.openModalErrorConnection = true;
+      }
     },
   },
 };
