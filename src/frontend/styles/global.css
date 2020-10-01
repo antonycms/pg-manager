@@ -1,3 +1,4 @@
+/* ESTILO DA BARRA DE ROLAGEM */
 html {
   overflow-y: auto;
 }
@@ -14,3 +15,4 @@ html {
   /*barra total*/
   background-color: #f5f5f5;
 }
+/* FIM ESTILO DA BARRA DE ROLAGEM */
