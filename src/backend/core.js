@@ -1,4 +1,4 @@
-import { Sequelize, Options } from 'sequelize';
+import { Options } from 'sequelize';
 import createConnection from './factorys/createConnection';
 import callFrontend from './utils/callFrontend';
 import services from './getAllServices';
@@ -20,13 +20,14 @@ export class Core {
       this.connection = null;
     }
 
-    const connection = await createConnection(localOptions);
+    try {
+      const connection = await createConnection(localOptions);
 
-    if (!(connection instanceof Sequelize)) {
-      throw new Error('Invalid Connection');
+      this.connection = connection;
+      return true;
+    } catch (_) {
+      return false;
     }
-
-    this.connection = connection;
   }
 
   async testConnection(options) {
