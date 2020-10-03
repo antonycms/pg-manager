@@ -1,6 +1,7 @@
 <template>
   <v-app>
-    <Header />
+    <HomeHeader v-if="!actualDatabase" />
+    <HeaderManageDabatase v-else />
 
     <v-main>
       <router-view />
@@ -11,14 +12,22 @@
 </template>
 
 <script>
-import Header from '@/frontend/components/Header';
+import HomeHeader from '@/frontend/components/HomeHeader';
+import HeaderManageDabatase from '@/frontend/components/HeaderManageDabatase';
 import Footer from '@/frontend/components/Footer';
 
 export default {
   name: 'App',
   components: {
-    Header,
+    HomeHeader,
+    HeaderManageDabatase,
     Footer,
+  },
+
+  computed: {
+    actualDatabase() {
+      return this.$store.state.actualDatabase;
+    },
   },
 };
 </script>

@@ -19,16 +19,33 @@ class DatabaseService {
     return tableNames.map(obj => obj.table_name);
   }
 
-  async getAllSchemas() {
-    const schemas = await this.core.connection.showAllSchemas();
+  async getAllSchemasWithTables() {
+    const schemas = await this.getAllSchemas();
 
     const data = schemas.reduce(async (acm, schema) => {
       const tables = await this._getAllTableNames(schema);
 
-      return [...acm, { schema, tables }];
+      return [...(await acm), { schema, tables }];
     }, []);
 
     return data;
+  }
+
+  async getAllSchemas() {
+    const [data] = await this.core.connection.query(`
+      select schema_name
+      from information_schema.schemata;
+    `);
+
+    return data
+      .map(queryData => queryData.schema_name)
+      .filter(schema => {
+        return (
+          schema !== 'information_schema' &&
+          schema !== 'pg_catalog' &&
+          schema !== 'pg_toast'
+        );
+      });
   }
 
   async getAllDataInTable({ schemeName = '', tableName = '' }) {
@@ -46,6 +63,12 @@ export default function createDatabaseService(core) {
   }
 
   const service = new DatabaseService(core);
+
+  callFrontend({
+    context: service,
+    eventName: 'service/database/getAllSchemasWithTables',
+    functionExec: service.getAllSchemasWithTables,
+  });
 
   callFrontend({
     context: service,

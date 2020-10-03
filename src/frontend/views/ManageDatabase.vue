@@ -1,5 +1,7 @@
 <template>
-  <div></div>
+  <div>
+    main
+  </div>
 </template>
 
 <script>
@@ -7,5 +9,3 @@ export default {
   name: 'ManageDatabase',
 };
 </script>
-
-<style></style>

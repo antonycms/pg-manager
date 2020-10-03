@@ -74,7 +74,7 @@ export default {
       required: true,
     },
     port: {
-      type: Number,
+      type: [Number, String],
       required: true,
     },
   },
@@ -112,7 +112,11 @@ export default {
         return;
       }
 
-      this.$store.commit('SET_ACTUAL_DATABASE', configDB);
+      this.$store.commit('SET_ACTUAL_DATABASE', {
+        ...configDB,
+        connectionName: this.connectionName,
+      });
+      this.$router.push({ name: 'ManageDatabase' });
     },
   },
 };
