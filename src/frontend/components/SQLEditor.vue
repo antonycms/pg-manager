@@ -44,7 +44,7 @@ export default {
 /* required class */
 .sql_editor {
   /* we dont use `language-` classes anymore so thats why we need to add background and text color manually */
-  background: #f5f5f5;
+  background: var(--background);
   color: rgb(255, 0, 0);
   outline: none;
 
@@ -52,5 +52,15 @@ export default {
   font-family: Fira code, Fira Mono, Consolas, Menlo, Courier, monospace;
   font-size: 14px;
   padding: 5px;
+}
+</style>
+
+<style>
+.prism-editor-wrapper,
+.prism-editor__container {
+  min-height: 100% !important;
+}
+.prism-editor__textarea {
+  outline: transparent;
 }
 </style>
