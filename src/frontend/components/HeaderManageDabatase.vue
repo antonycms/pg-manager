@@ -86,6 +86,7 @@
             dark
             hide-details
             label="Busca sensitiva"
+            color="white"
           ></v-checkbox>
         </v-sheet>
 

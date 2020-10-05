@@ -6,6 +6,7 @@
         :search="search"
         :headers="headers"
         :tableData="tableData"
+        :loading="loadingTableData"
         class="manage_database_table"
       />
     </v-row>
@@ -34,14 +35,16 @@ export default {
   },
   watch: {
     async actualTable() {
+      this.headers = [];
+      this.tableData = [];
+
       if (!this.actualTable) {
-        this.headers = [];
-        this.tableData = [];
         return;
       }
 
       const { schemeName, tableName } = this.actualTable;
 
+      this.loadingTableData = true;
       const data = await callBackend({
         eventName: 'service/database/getAllDataInTable',
         data: {
@@ -49,8 +52,8 @@ export default {
           tableName,
         },
       });
+      this.loadingTableData = false;
 
-      console.log(data);
       this.headers = data.tableColumns.map(column => ({
         value: column.column_name,
         text: column.column_name,
@@ -68,6 +71,7 @@ export default {
     headers: [],
     tableData: [],
     sql: '',
+    loadingTableData: false,
   }),
 };
 </script>

@@ -11,7 +11,7 @@ const icon = dev
 
 export const browserWindowConfig = {
   title: 'PDV Softwhere',
-  // icon,
+  icon,
   width: 800,
   height: 600,
   minWidth: 800,

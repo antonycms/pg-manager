@@ -21,6 +21,10 @@
       :headers="headers"
       :items="tableData"
       :search="search"
+      :loading="loading"
+      loading-text="Carregando... Por favor aguarde"
+      no-data-text="Nenhum dado disponivel."
+      no-results-text="Nenhum dado disponivel."
     />
   </v-card>
 </template>
@@ -41,6 +45,9 @@ export default {
       type: Array,
       default: () => [],
     },
+    loading: {
+      type: Boolean,
+    },
   },
 
   data: () => ({
@@ -56,7 +63,7 @@ export default {
   flex: 1 !important;
   overflow: auto;
 
-  border-top: 1px solid rgba(0, 0, 0, 0.2);
+  border-top: 1px solid var(--black-white);
 }
 </style>
 
@@ -68,9 +75,9 @@ export default {
 
 th:not(:last-child),
 td:not(:last-child) {
-  border-right: 1px solid rgba(0, 0, 0, 0.2);
+  border-right: 1px solid var(--black-white);
 }
 tr:last-child td {
-  border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+  border-bottom: 1px solid var(--black-white);
 }
 </style>

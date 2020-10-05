@@ -2,6 +2,12 @@
   "name": "postgres_db",
   "version": "0.1.0",
   "private": true,
+  "description": "Um simples gerenciador de banco de dados postgres",
+  "author": {
+    "email": "antonyc828@gmail.com",
+    "name": "Antony Santos",
+    "url": "https://github.com/antonycms"
+  },
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",

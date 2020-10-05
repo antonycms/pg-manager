@@ -13,6 +13,17 @@ html {
 }
 ::-webkit-scrollbar-track {
   /*barra total*/
-  background-color: #f5f5f5;
+  background-color: var(--white-black);
 }
 /* FIM ESTILO DA BARRA DE ROLAGEM */
+
+#app.theme--light {
+  --white-black-op-05: rgba(0, 0, 0, 0.5);
+  --white-black: white;
+  --black-white: rgba(0, 0, 0, 0.2);
+}
+#app.theme--dark {
+  --white-black-op-05: rgba(255, 255, 255, 0.5);
+  --white-black: #1e1e1e;
+  --black-white: rgba(255, 255, 255, 0.1);
+}
