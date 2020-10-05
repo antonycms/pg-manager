@@ -32,6 +32,10 @@ export default {
     actualTable() {
       return this.$store.state.actualTable;
     },
+
+    showSQLEditor() {
+      return this.$store.state.showSqlEditor;
+    },
   },
   watch: {
     async actualTable() {
@@ -64,8 +68,6 @@ export default {
   },
 
   data: () => ({
-    showSQLEditor: true,
-
     tableName: 'usuario',
     search: '',
     headers: [],

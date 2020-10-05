@@ -1,5 +1,5 @@
 <template>
-  <div class="teste3">
+  <fragment>
     <v-app-bar elevation="0" app white>
       <div class="d-flex align-center">
         <v-btn
@@ -119,7 +119,7 @@
         </v-treeview>
       </div>
     </Sidebar>
-  </div>
+  </fragment>
 </template>
 
 <script>
@@ -127,7 +127,7 @@ import Sidebar from '@/frontend/components/Sidebar';
 import callBackend from '../utils/callBackend';
 
 export default {
-  name: 'Header',
+  name: 'HeaderManageDatabase',
   components: {
     Sidebar,
   },

@@ -8,6 +8,9 @@ Vue.use(Vuex);
 const vuexPersist = new VuexPersist({
   key: 'pg_manager',
   storage: window.localStorage,
+  filter: mutation =>
+    mutation.type != 'SET_ACTUAL_DATABASE' &&
+    mutation.type != 'SET_ACTUAL_TABLE',
 });
 
 export default new Vuex.Store({
@@ -17,6 +20,7 @@ export default new Vuex.Store({
     actualDatabase: null,
     actualTable: null,
     active_theme: 'LIGHT',
+    showSqlEditor: false,
   },
   mutations: {
     SET_DATABASES(state, data) {
@@ -35,6 +39,9 @@ export default new Vuex.Store({
       }
 
       state.active_theme = 'LIGHT';
+    },
+    SET_SHOW_SQL_EDITOR(state, data) {
+      state.showSqlEditor = data;
     },
   },
   actions: {

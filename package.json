@@ -28,6 +28,7 @@
     "sequelize": "^6.3.5",
     "uuid": "^8.3.0",
     "vue": "^2.6.11",
+    "vue-fragment": "^1.5.1",
     "vue-prism-editor": "^1.2.2",
     "vue-router": "^3.2.0",
     "vuetify": "^2.2.11",
