@@ -5,13 +5,15 @@
 
       <v-spacer />
 
-      <v-text-field
-        v-model="search"
-        append-icon="mdi-magnify"
-        label="Search"
-        single-line
-        hide-details
-      ></v-text-field>
+      <v-col class="pa-0" cols="12" sm="4" md="4" lg="4">
+        <v-text-field
+          v-model="search"
+          append-icon="mdi-magnify"
+          label="Filtrar"
+          single-line
+          hide-details
+        />
+      </v-col>
     </v-card-title>
 
     <v-data-table
@@ -25,13 +27,11 @@
 
 <script>
 export default {
+  name: 'TableDatabase',
   props: {
     tableName: {
       type: String,
       required: true,
-    },
-    search: {
-      type: String,
     },
     headers: {
       type: Array,
@@ -42,6 +42,10 @@ export default {
       default: () => [],
     },
   },
+
+  data: () => ({
+    search: '',
+  }),
 };
 </script>
 
@@ -51,6 +55,8 @@ export default {
   flex-direction: column !important;
   flex: 1 !important;
   overflow: auto;
+
+  border-top: 1px solid rgba(0, 0, 0, 0.2);
 }
 </style>
 
@@ -58,5 +64,13 @@ export default {
 .table_database .v-data-table__wrapper {
   flex: 1 !important;
   overflow: auto;
+}
+
+th:not(:last-child),
+td:not(:last-child) {
+  border-right: 1px solid rgba(0, 0, 0, 0.2);
+}
+tr:last-child td {
+  border-bottom: 1px solid rgba(0, 0, 0, 0.2);
 }
 </style>

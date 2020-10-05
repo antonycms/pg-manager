@@ -1,8 +1,10 @@
 <template>
   <v-footer padless>
     <v-col class="text-center" cols="12">
-      {{ new Date().getFullYear() }}
-      — <strong>PG Manager</strong>
+      <strong>PG Manager</strong> by
+      <a target="_blank" href="https://github.com/antonycms">
+        <strong>antonycms</strong>
+      </a>
     </v-col>
 
     <ChangeThemeButton />

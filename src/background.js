@@ -1,4 +1,11 @@
-import { app, protocol, BrowserWindow, Menu, globalShortcut } from 'electron';
+import {
+  app,
+  protocol,
+  BrowserWindow,
+  Menu,
+  globalShortcut,
+  shell,
+} from 'electron';
 import { createProtocol } from 'vue-cli-plugin-electron-builder/lib';
 import { browserWindowConfig } from '@/config/electron';
 
@@ -37,6 +44,14 @@ function createWindow() {
 
   win.on('closed', () => {
     win = null;
+  });
+
+  // open link taget _blank in default browser in OS
+  win.webContents.on('new-window', (e, url) => {
+    if (url != win.webContents.getURL()) {
+      e.preventDefault();
+      shell.openExternal(url);
+    }
   });
 }
 

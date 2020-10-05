@@ -19,6 +19,16 @@ class DatabaseService {
     return tableNames.map(obj => obj.table_name);
   }
 
+  async _getAllTableColumns({ schemeName = '', tableName = '' }) {
+    const [tableColumns] = await this.core.connection.query(`
+      SELECT column_name, data_type 
+      FROM information_schema.columns
+      WHERE table_name = '${tableName}' AND table_schema = '${schemeName}';
+    `);
+
+    return tableColumns;
+  }
+
   async getAllSchemasWithTables() {
     const schemas = await this.getAllSchemas();
 
@@ -49,11 +59,20 @@ class DatabaseService {
   }
 
   async getAllDataInTable({ schemeName = '', tableName = '' }) {
-    const [data] = await this.core.connection.query(`
-      SELECT * FROM "${schemeName}"."${tableName}";
-    `);
+    const tableColumns = await this._getAllTableColumns({
+      schemeName,
+      tableName,
+    });
 
-    return data;
+    const sql = `SELECT * FROM "${schemeName}"."${tableName}";`;
+
+    const [data] = await this.core.connection.query(sql);
+
+    return {
+      tableColumns,
+      data,
+      sql,
+    };
   }
 }
 

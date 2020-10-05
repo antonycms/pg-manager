@@ -24,11 +24,19 @@ export default {
   },
 
   data: () => ({
-    code: 'SELECT * FROM "public"."pessoas"',
+    code: '',
   }),
+  props: {
+    sql: {
+      type: String,
+    },
+  },
   watch: {
     code() {
       this.$emit('sql_textarea_data', { code: this.code });
+    },
+    sql() {
+      this.code = this.sql;
     },
   },
 

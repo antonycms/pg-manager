@@ -168,7 +168,17 @@ export default {
 
   watch: {
     selectedSchema() {
-      console.log(this.selectedSchema);
+      if (!this.selectedSchema) {
+        this.$store.commit('SET_ACTUAL_TABLE', null);
+        return;
+      }
+
+      const { name: tableName, schema: schemeName } = this.selectedSchema;
+
+      this.$store.commit('SET_ACTUAL_TABLE', {
+        schemeName,
+        tableName,
+      });
     },
   },
 
