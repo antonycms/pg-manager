@@ -14,9 +14,13 @@ class DatabaseService {
       return;
     }
 
-    const [data] = await this.core.connection.query(query);
+    try {
+      const [data] = await this.core.connection.query(query);
 
-    return data;
+      return data;
+    } catch ({ message }) {
+      return message;
+    }
   }
 
   async _getAllTableNames(schema) {
