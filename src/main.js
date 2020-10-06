@@ -4,6 +4,7 @@ import router from '@/frontend/router';
 import store from '@/frontend/store';
 import vuetify from './frontend/plugins/vuetify';
 import './frontend/plugins/fragment';
+import './frontend/plugins/vueClipboard';
 
 Vue.config.productionTip = false;
 

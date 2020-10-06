@@ -17,6 +17,7 @@
     </v-card-title>
 
     <v-data-table
+      dense
       class="table_database"
       :headers="headers"
       :items="tableData"

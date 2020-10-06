@@ -2676,6 +2676,15 @@ cli-width@^3.0.0:
   resolved "https://registry.yarnpkg.com/cli-width/-/cli-width-3.0.0.tgz#a2f48437a2caa9a22436e794bf071ec9e61cedf6"
   integrity sha512-FxqpkPPwu1HjuN93Omfm4h8uIanXofW0RxVEW3k5RKx+mJJYSthzNhp32Kzxxy3YAEZ/Dc/EWN1vZRY0+kOhbw==
 
+clipboard@^1.7.1:
+  version "1.7.1"
+  resolved "https://registry.yarnpkg.com/clipboard/-/clipboard-1.7.1.tgz#360d6d6946e99a7a1fef395e42ba92b5e9b5a16b"
+  integrity sha1-Ng1taUbpmnof7zleQrqStem1oWs=
+  dependencies:
+    good-listener "^1.2.2"
+    select "^1.1.2"
+    tiny-emitter "^2.0.0"
+
 clipboard@^2.0.0:
   version "2.0.6"
   resolved "https://registry.yarnpkg.com/clipboard/-/clipboard-2.0.6.tgz#52921296eec0fdf77ead1749421b21c968647376"
@@ -9497,6 +9506,13 @@ vue-cli-plugin-vuetify@~2.0.7:
     null-loader "^3.0.0"
     semver "^7.1.2"
     shelljs "^0.8.3"
+
+vue-clipboards@^1.3.0:
+  version "1.3.0"
+  resolved "https://registry.yarnpkg.com/vue-clipboards/-/vue-clipboards-1.3.0.tgz#9e166c642dc2b0a1dea2ae0b7485f8f81285e89f"
+  integrity sha512-VMDYHpLQH0EUmqfk9b5XMrkvSu/HjNsLW2EBR4OS6JZHcv/PxmWYdoTBPVlp5eYrhWy07La8nWpRwAh09Mgufw==
+  dependencies:
+    clipboard "^1.7.1"
 
 vue-eslint-parser@^7.0.0:
   version "7.1.0"

@@ -9,6 +9,16 @@ class DatabaseService {
     this.core = core;
   }
 
+  async executeQuery(query) {
+    if (!query) {
+      return;
+    }
+
+    const [data] = await this.core.connection.query(query);
+
+    return data;
+  }
+
   async _getAllTableNames(schema) {
     const [tableNames] = await this.core.connection.query(`
       SELECT table_name
@@ -82,6 +92,12 @@ export default function createDatabaseService(core) {
   }
 
   const service = new DatabaseService(core);
+
+  callFrontend({
+    context: service,
+    eventName: 'service/database/executeQuery',
+    functionExec: service.executeQuery,
+  });
 
   callFrontend({
     context: service,

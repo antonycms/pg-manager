@@ -5,6 +5,7 @@ html {
 
 ::-webkit-scrollbar {
   width: 6px; /*largura da barra de rolagem*/
+  height: 6px;
 }
 ::-webkit-scrollbar-thumb {
   /*barra de rolagem*/
@@ -17,6 +18,7 @@ html {
 }
 /* FIM ESTILO DA BARRA DE ROLAGEM */
 
+/* PERSONALIZED COLORS */
 #app.theme--light {
   --white-black-op-05: rgba(0, 0, 0, 0.5);
   --white-black: white;
@@ -27,3 +29,38 @@ html {
   --white-black: #1e1e1e;
   --black-white: rgba(255, 255, 255, 0.1);
 }
+/* END PERSONALIZED COLORS */
+
+/* PRISM EDITOR STYLE */
+.prism-editor-wrapper {
+  /* we dont use `language-` classes anymore so thats why we need to add background and text color manually */
+  background: var(--white-black);
+  color: rgb(255, 0, 0);
+  outline: none;
+
+  /* you must provide font-family font-size line-height. Example: */
+  font-family: Fira code, Fira Mono, Consolas, Menlo, Courier, monospace;
+  font-size: 14px;
+}
+
+.prism-editor-wrapper,
+.prism-editor__container {
+  min-height: 100% !important;
+}
+
+.prism-editor__line-numbers {
+  border-right: 1px solid var(--black-white);
+}
+
+.prism-editor__line-numbers div {
+  text-align: center !important;
+}
+
+.prism-editor__textarea {
+  outline: transparent;
+}
+
+.token.operator {
+  background-color: transparent !important;
+}
+/* END PRISM EDITOR STYLE */

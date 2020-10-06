@@ -1,9 +1,9 @@
 <template>
   <prism-editor
-    class="sql_editor"
+    readonly
+    class="json_editor"
     v-model="code"
     :highlight="highlighter"
-    line-numbers
   ></prism-editor>
 </template>
 
@@ -13,8 +13,7 @@ import { PrismEditor } from 'vue-prism-editor';
 import 'vue-prism-editor/dist/prismeditor.min.css';
 
 import { highlight, languages } from 'prismjs/components/prism-core';
-import 'prismjs/components/prism-sql';
-import 'prismjs/components/prism-plsql.js';
+import 'prismjs/components/prism-json.js';
 import 'prismjs/themes/prism.css';
 
 export default {
@@ -27,22 +26,22 @@ export default {
     code: '',
   }),
   props: {
-    sql: {
+    json: {
       type: String,
     },
   },
   watch: {
     code() {
-      this.$emit('sql_textarea_data', this.code);
+      this.$emit('sql_textarea_data', { code: this.code });
     },
-    sql() {
-      this.code = this.sql;
+    json() {
+      this.code = this.json;
     },
   },
 
   methods: {
     highlighter(code) {
-      return highlight(code, languages.plsql); //returns html
+      return highlight(code, languages.json); //returns html
     },
   },
 };

@@ -1,5 +1,6 @@
 <template>
   <v-navigation-drawer
+    disable-resize-watcher
     class="sidebar_db_container"
     v-model="sidebarMenu"
     app
