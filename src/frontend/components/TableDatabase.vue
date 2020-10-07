@@ -1,43 +1,21 @@
 <template>
-  <v-card height="100%" width="100%">
-    <v-card-title>
-      {{ tableName }}
-
-      <v-spacer />
-
-      <v-col class="pa-0" cols="12" sm="4" md="4" lg="4">
-        <v-text-field
-          v-model="search"
-          append-icon="mdi-magnify"
-          label="Filtrar"
-          single-line
-          hide-details
-        />
-      </v-col>
-    </v-card-title>
-
-    <v-data-table
-      dense
-      class="table_database"
-      :headers="headers"
-      :items="tableData"
-      :search="search"
-      :loading="loading"
-      loading-text="Carregando... Por favor aguarde"
-      no-data-text="Nenhum dado disponivel."
-      no-results-text="Nenhum dado disponivel."
-    />
-  </v-card>
+  <v-data-table
+    dense
+    class="table_database"
+    :headers="headers"
+    :items="tableData"
+    :search="search"
+    :loading="loading"
+    loading-text="Carregando... Por favor aguarde"
+    no-data-text="Nenhum dado disponivel."
+    no-results-text="Nenhum dado disponivel."
+  />
 </template>
 
 <script>
 export default {
   name: 'TableDatabase',
   props: {
-    tableName: {
-      type: String,
-      required: true,
-    },
     headers: {
       type: Array,
       default: () => [],
@@ -49,11 +27,10 @@ export default {
     loading: {
       type: Boolean,
     },
+    search: {
+      type: String,
+    },
   },
-
-  data: () => ({
-    search: '',
-  }),
 };
 </script>
 

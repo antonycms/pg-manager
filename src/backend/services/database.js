@@ -35,7 +35,7 @@ class DatabaseService {
 
   async _getAllTableColumns({ schemeName = '', tableName = '' }) {
     const [tableColumns] = await this.core.connection.query(`
-      SELECT column_name, data_type 
+      SELECT column_name, data_type, is_nullable, column_default 
       FROM information_schema.columns
       WHERE table_name = '${tableName}' AND table_schema = '${schemeName}';
     `);

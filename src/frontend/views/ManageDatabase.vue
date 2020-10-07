@@ -1,13 +1,13 @@
 <template>
   <v-container class="pb-0 manage_database_container">
     <v-row justify="center" class="row_table_database">
-      <TableDatabase
-        :tableName="tableName"
-        :search="search"
-        :headers="headers"
-        :tableData="tableData"
-        :loading="loadingTableData"
+      <ContentManageDatabase
         class="manage_database_table"
+        :search="search"
+        :headersData="headersData"
+        :tableData="tableData"
+        :tableInformation="tableInformation"
+        :loading="loadingTableData"
       />
     </v-row>
 
@@ -43,7 +43,7 @@
 </template>
 
 <script>
-import TableDatabase from '@/frontend/components/TableDatabase';
+import ContentManageDatabase from '@/frontend/components/ContentManageDatabase';
 import SQLEditor from '@/frontend/components/SQLEditor';
 import JSONEditor from '@/frontend/components/JSONEditor';
 import callBackend from '../utils/callBackend';
@@ -51,7 +51,7 @@ import callBackend from '../utils/callBackend';
 export default {
   name: 'ManageDatabase',
   components: {
-    TableDatabase,
+    ContentManageDatabase,
     SQLEditor,
     JSONEditor,
   },
@@ -66,9 +66,9 @@ export default {
   },
   watch: {
     async actualTable() {
-      this.headers = [];
+      this.headersData = [];
       this.tableData = [];
-      this.tableName = 'Tabela';
+      this.tableInformation = [];
 
       if (!this.actualTable) {
         return;
@@ -76,7 +76,6 @@ export default {
 
       const { schemeName, tableName } = this.actualTable;
 
-      this.tableName = tableName;
       this.loadingTableData = true;
 
       const data = await callBackend({
@@ -88,20 +87,27 @@ export default {
       });
 
       this.loadingTableData = false;
-      this.headers = data.tableColumns.map(column => ({
+
+      this.headersData = data.tableColumns.map(column => ({
         value: column.column_name,
         text: column.column_name,
       }));
+      this.tableInformation = data.tableColumns.map(column => {
+        const nullable = column.is_nullable === 'NO' ? 'Não' : 'Sim';
+        column.is_nullable = nullable;
+        return column;
+      });
       this.tableData = data.data;
       this.sql = data.sql;
     },
   },
 
   data: () => ({
-    tableName: 'Tabela',
     search: '',
-    headers: [],
+    headersData: [],
     tableData: [],
+    tableInformation: [],
+
     sql: '',
     SqlQueryData: '',
     loadingTableData: false,
