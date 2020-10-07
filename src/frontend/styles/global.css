@@ -35,7 +35,7 @@ html {
 .prism-editor-wrapper {
   /* we dont use `language-` classes anymore so thats why we need to add background and text color manually */
   background: var(--white-black);
-  color: rgb(255, 0, 0);
+  /* color: rgb(255, 0, 0); */
   outline: none;
 
   /* you must provide font-family font-size line-height. Example: */

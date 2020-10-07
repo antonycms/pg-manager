@@ -39,6 +39,7 @@
           :headers="headersInformation"
           :tableData="tableInformation"
           :loading="loading"
+          hideDefaultFooter
         />
       </v-tab-item>
     </v-tabs-items>
@@ -89,6 +90,10 @@ export default {
       {
         value: 'is_nullable',
         text: 'Nulavel',
+      },
+      {
+        value: 'reference',
+        text: 'Referencia',
       },
     ],
   }),

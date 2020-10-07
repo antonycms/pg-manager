@@ -9,6 +9,8 @@
     loading-text="Carregando... Por favor aguarde"
     no-data-text="Nenhum dado disponivel."
     no-results-text="Nenhum dado disponivel."
+    :hide-default-footer="hideDefaultFooter"
+    :disable-pagination="hideDefaultFooter"
   />
 </template>
 
@@ -29,6 +31,9 @@ export default {
     },
     search: {
       type: String,
+    },
+    hideDefaultFooter: {
+      type: Boolean,
     },
   },
 };
