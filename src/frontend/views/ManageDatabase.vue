@@ -63,6 +63,10 @@ export default {
     showSQLEditor() {
       return this.$store.state.showSqlEditor;
     },
+
+    language() {
+      return this.$vuetify.lang.locales[this.$vuetify.lang.current];
+    },
   },
   watch: {
     async actualTable() {
@@ -93,7 +97,9 @@ export default {
         text: column.column_name,
       }));
       this.tableInformation = data.tableColumns.map(column => {
-        const nullable = column.is_nullable === 'NO' ? 'Não' : 'Sim';
+        const nullable =
+          column.is_nullable === 'NO' ? this.language.no : this.language.yes;
+
         column.is_nullable = nullable;
         return column;
       });

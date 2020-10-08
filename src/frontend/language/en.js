@@ -14,6 +14,8 @@ export default {
   cancel: 'Cancel',
   add: 'Add',
   requiredFields: '*indicates required fields',
+  yes: 'Yes',
+  no: 'No',
 
   databaseTexts: {
     schema: 'Schemas',
