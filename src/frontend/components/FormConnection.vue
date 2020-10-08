@@ -39,7 +39,7 @@
                 <v-col cols="12" sm="5" md="5">
                   <v-text-field
                     v-model="connectionConfig.host"
-                    :label="language.databaseTexts.user + '*'"
+                    :label="language.databaseTexts.host + '*'"
                     hint="Host de acesso do banco de dados"
                     required
                   ></v-text-field>
