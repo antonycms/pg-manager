@@ -4,7 +4,6 @@
   <img alt="Version" src="https://img.shields.io/badge/version-0.8.0-blue.svg?cacheSeconds=2592000" />
   <img src="https://img.shields.io/badge/npm-%3E%3D6.14.4-blue.svg" />
   <img src="https://img.shields.io/badge/node-%3E%3D12.17.0-blue.svg" />
-  <img src="https://img.shields.io/badge/php-7.2-blue.svg" />
   <a href="https://github.com/antonycms/pg-manager#readme" target="_blank">
     <img alt="Documentation" src="https://img.shields.io/badge/documentation-yes-brightgreen.svg" />
   </a>
