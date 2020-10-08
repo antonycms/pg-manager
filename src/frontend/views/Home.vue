@@ -1,12 +1,16 @@
 <template>
   <div>
-    <h4 class="home_title">Conexões Salvas</h4>
+    <h4 class="home_title remove_select_text">
+      {{ language.databaseTexts.savedConnections }}
+    </h4>
 
     <v-container>
       <v-row>
         <div v-if="!connections.length" class="not_con_message">
           <v-icon size="30">mdi-alert-circle-outline</v-icon>
-          <p>Nenhuma conexão adicionada.</p>
+          <p>
+            {{ language.databaseTexts.noHaveConnections }}
+          </p>
         </div>
 
         <v-col
@@ -32,7 +36,7 @@
 
       <ModalLoading
         :openModal="openModal"
-        loadingMessage="Conectando a base de dados..."
+        :loadingMessage="language.databaseTexts.dbMessageConnection"
       />
     </v-container>
   </div>
@@ -52,6 +56,10 @@ export default {
   computed: {
     connections() {
       return this.$store.state.databases;
+    },
+
+    language() {
+      return this.$vuetify.lang.locales[this.$vuetify.lang.current];
     },
   },
 

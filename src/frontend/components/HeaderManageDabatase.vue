@@ -1,7 +1,7 @@
 <template>
   <fragment>
     <v-app-bar elevation="0" app white>
-      <div class="d-flex align-center">
+      <div class="d-flex align-center remove_select_text">
         <v-btn
           class="sidebarMenu_btn_state"
           small
@@ -31,7 +31,7 @@
       <v-spacer></v-spacer>
 
       <v-btn color="primary" rounded dark @click="handleDisconnect">
-        Desconectar
+        {{ language.disconnect }}
       </v-btn>
     </v-app-bar>
 
@@ -40,7 +40,7 @@
         <v-card elevation="1">
           <v-card-title>
             <v-icon>mdi-database</v-icon>
-            <span class="sidebar_title">{{ dbName }}</span>
+            <span class="sidebar_title remove_select_text">{{ dbName }}</span>
 
             <v-spacer />
 
@@ -65,7 +65,7 @@
                 </v-btn>
               </template>
 
-              <span>Atualizar</span>
+              <span>{{ language.refresh }}</span>
             </v-tooltip>
           </v-card-title>
         </v-card>
@@ -73,7 +73,7 @@
         <v-sheet class="pa-2 pt-4 primary">
           <v-text-field
             v-model="searchTableName"
-            label="Buscar"
+            :label="language.searchText"
             dark
             flat
             solo-inverted
@@ -85,7 +85,7 @@
             v-model="tableSearchcaseSensitive"
             dark
             hide-details
-            label="Busca sensitiva"
+            :label="language.sensitiveSearch"
             color="white"
           ></v-checkbox>
         </v-sheet>
@@ -146,7 +146,7 @@ export default {
     items() {
       return [
         {
-          name: 'Esquemas',
+          name: this.language.databaseTexts.schema,
           children: this.schemas,
         },
       ];
@@ -164,6 +164,10 @@ export default {
             return item[textKey].indexOf(search) > -1;
           }
         : undefined;
+    },
+
+    language() {
+      return this.$vuetify.lang.locales[this.$vuetify.lang.current];
     },
   },
 
@@ -199,6 +203,10 @@ export default {
     },
 
     handleDisconnect() {
+      callBackend({
+        eventName: 'core/closeConnection',
+      });
+
       this.$store.commit('SET_ACTUAL_DATABASE', null);
       this.$router.push('/');
     },

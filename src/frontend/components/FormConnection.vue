@@ -3,13 +3,15 @@
     <v-dialog v-model="dialog" persistent max-width="600px">
       <template v-slot:activator="{ on, attrs }">
         <v-btn color="primary" rounded dark v-bind="attrs" v-on="on">
-          Adicionar Conexão
+          {{ language.databaseTexts.addConnection }}
         </v-btn>
       </template>
 
       <v-card>
         <v-card-title>
-          <span class="headline">Adicionar nova conexão</span>
+          <span class="headline">{{
+            language.databaseTexts.addNewConnection
+          }}</span>
         </v-card-title>
 
         <form v-on:submit.prevent="handleConnection" id="login_form">
@@ -19,7 +21,7 @@
                 <v-col cols="12">
                   <v-text-field
                     v-model="connectionName"
-                    label="Nome da Conexão*"
+                    :label="language.databaseTexts.connectionName + '*'"
                     hint="Nome da conexão que aparecerá no cartão na pagina principal"
                     required
                   ></v-text-field>
@@ -28,7 +30,7 @@
                 <v-col cols="12" sm="5" md="5">
                   <v-text-field
                     v-model="connectionConfig.database"
-                    label="Banco de dados*"
+                    :label="language.databaseTexts.database + '*'"
                     hint="banco de dados a ser utilizado"
                     required
                   ></v-text-field>
@@ -37,7 +39,7 @@
                 <v-col cols="12" sm="5" md="5">
                   <v-text-field
                     v-model="connectionConfig.host"
-                    label="Host*"
+                    :label="language.databaseTexts.user + '*'"
                     hint="Host de acesso do banco de dados"
                     required
                   ></v-text-field>
@@ -46,7 +48,7 @@
                 <v-col cols="12" sm="2" md="2">
                   <v-text-field
                     v-model="connectionConfig.port"
-                    label="Porta*"
+                    :label="language.databaseTexts.port + '*'"
                     hint="Porta de acesso para o banco de dados"
                     required
                     type="number"
@@ -56,7 +58,7 @@
                 <v-col cols="12" sm="6" md="6">
                   <v-text-field
                     v-model="connectionConfig.username"
-                    label="Usuario*"
+                    :label="language.databaseTexts.user + '*'"
                     hint="Usuário de acesso do banco de dados"
                     required
                   ></v-text-field>
@@ -65,7 +67,7 @@
                 <v-col cols="12" sm="6" md="6">
                   <v-text-field
                     v-model="connectionConfig.password"
-                    label="Senha*"
+                    :label="language.databaseTexts.password + '*'"
                     type="password"
                     hint="Senha do usuário de acesso do banco de dados"
                     required
@@ -74,7 +76,7 @@
               </v-row>
             </v-container>
 
-            <small>*indica os campos obrigatorios</small>
+            <small>{{ language.requiredFields }}</small>
           </v-card-text>
         </form>
 
@@ -84,7 +86,9 @@
             color="blue darken-1"
             @click="handleTestConnection"
           >
-            <span class="white--text" v-if="!loading">Testar Conexão</span>
+            <span class="white--text" v-if="!loading">
+              {{ language.databaseTexts.testConnection }}
+            </span>
 
             <v-progress-circular
               indeterminate
@@ -107,11 +111,11 @@
             text
             @click="handleResetConnectionFormData"
           >
-            Cancelar
+            {{ language.cancel }}
           </v-btn>
 
           <v-btn form="login_form" type="submit" color="blue darken-1" text>
-            Adicionar
+            {{ language.add }}
           </v-btn>
         </v-card-actions>
 
@@ -154,6 +158,12 @@ export default {
 
     loading: false,
   }),
+
+  computed: {
+    language() {
+      return this.$vuetify.lang.locales[this.$vuetify.lang.current];
+    },
+  },
 
   methods: {
     async handleTestConnection() {

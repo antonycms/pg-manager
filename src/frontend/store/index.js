@@ -8,13 +8,6 @@ Vue.use(Vuex);
 const vuexPersist = new VuexPersist({
   key: 'pg_manager',
   storage: window.localStorage,
-  filter: mutation => {
-    const verify =
-      mutation.type !== 'SET_ACTUAL_DATABASE' &&
-      mutation.type !== 'SET_ACTUAL_TABLE';
-
-    return verify;
-  },
 });
 
 export default new Vuex.Store({

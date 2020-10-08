@@ -6,11 +6,9 @@
     :items="tableData"
     :search="search"
     :loading="loading"
-    loading-text="Carregando... Por favor aguarde"
-    no-data-text="Nenhum dado disponivel."
-    no-results-text="Nenhum dado disponivel."
     :hide-default-footer="hideDefaultFooter"
     :disable-pagination="hideDefaultFooter"
+    draggable="false"
   />
 </template>
 

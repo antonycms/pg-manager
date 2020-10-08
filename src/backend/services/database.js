@@ -105,6 +105,7 @@ class DatabaseService {
       schemeName,
       tableName,
     });
+
     const tableColumns = _tableColumns.map(column => {
       column.reference = references.reduce((acm, reference) => {
         if (reference.column_name === column.column_name) {

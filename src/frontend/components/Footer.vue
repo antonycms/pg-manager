@@ -2,9 +2,9 @@
   <v-footer inset padless app>
     <ShowSqlEditorButton v-if="actualDatabase" />
 
-    <v-col class="text-center" cols="12">
+    <v-col class="text-center remove_select_text" cols="12">
       <strong>PG Manager</strong> by
-      <a target="_blank" href="https://github.com/antonycms">
+      <a target="_blank" href="https://github.com/antonycms" draggable="false">
         <strong>antonycms</strong>
       </a>
     </v-col>

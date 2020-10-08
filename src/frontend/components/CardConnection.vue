@@ -1,7 +1,7 @@
 <template>
   <v-card shaped class="mx-auto" max-width="344">
     <v-app-bar flat color="rgba(0, 0, 0, 0)" max-height="50">
-      <v-toolbar-title class="title pl-0">
+      <v-toolbar-title class="title pl-0 remove_select_text">
         {{ connectionName }}
       </v-toolbar-title>
 
@@ -15,21 +15,35 @@
     </v-app-bar>
 
     <v-card-text>
-      <div class="text--primary"><strong>Host:</strong> {{ host }}</div>
+      <div class="text--primary">
+        <strong draggable="false" class="remove_select_text">Host:</strong>
+        {{ host }}
+      </div>
 
-      <div class="text--primary"><strong>Porta:</strong> {{ port }}</div>
+      <div class="text--primary">
+        <strong draggable="false" class="remove_select_text">Porta:</strong>
+        {{ port }}
+      </div>
 
-      <div class="text--primary"><strong>Usuário:</strong> {{ username }}</div>
+      <div class="text--primary">
+        <strong draggable="false" class="remove_select_text">Usuário:</strong>
+        {{ username }}
+      </div>
     </v-card-text>
 
     <v-card-actions>
-      <v-btn @click="handleConnection" text color="primary accent-4">
-        Conectar
+      <v-btn
+        @click="handleConnection"
+        text
+        color="primary accent-4"
+        class="remove_select_text"
+      >
+        {{ connectMessage }}
       </v-btn>
     </v-card-actions>
 
     <ModalAlertBottom
-      modalMessage="Ocorreu um erro ao tentar estabelecer a conexão com o banco de dados!"
+      :modalMessage="connectionTextError"
       :openModal="openModalErrorConnection"
       @close_alert_modal="openModalErrorConnection = false"
     />
@@ -82,6 +96,18 @@ export default {
   data: () => ({
     openModalErrorConnection: false,
   }),
+
+  computed: {
+    language() {
+      return this.$vuetify.lang.locales[this.$vuetify.lang.current];
+    },
+    connectionTextError() {
+      return this.language.databaseTexts.connectionTextError;
+    },
+    connectMessage() {
+      return this.language.connect;
+    },
+  },
 
   methods: {
     removeConnection(data) {

@@ -29,6 +29,14 @@ export default {
       return this.$store.state.actualDatabase;
     },
   },
+
+  created() {
+    if (navigator.language.includes('pt')) {
+      this.$vuetify.lang.current = 'pt';
+    } else {
+      this.$vuetify.lang.current = 'en';
+    }
+  },
 };
 </script>
 

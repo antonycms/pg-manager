@@ -8,24 +8,26 @@
       </template>
 
       <v-card>
-        <v-card-title style="font-size: 18px !important;" class="headline">
-          Remover a conexão {{ connectionName }}?
+        <v-card-title
+          style="font-size: 18px !important;"
+          class="headline remove_select_text"
+        >
+          {{ language.databaseTexts.removeTheConnection }} {{ connectionName }}?
         </v-card-title>
 
-        <v-card-text>
-          Atenção, essa ação não poderá ser desfeita, deseja realmente remover
-          essa conexão?
+        <v-card-text class="remove_select_text">
+          {{ language.databaseTexts.AlertRemoveConnection }}
         </v-card-text>
 
         <v-card-actions>
           <v-spacer></v-spacer>
 
           <v-btn color="grey darken-1" text @click="dialog = false">
-            Cancelar
+            {{ language.cancel }}
           </v-btn>
 
           <v-btn color="red darken-1" text @click="handleRemoveConnection">
-            Remover Conexão
+            {{ language.databaseTexts.removeConnection }}
           </v-btn>
         </v-card-actions>
       </v-card>
@@ -44,6 +46,12 @@ export default {
     connectionID: {
       type: String,
       required: true,
+    },
+  },
+
+  computed: {
+    language() {
+      return this.$vuetify.lang.locales[this.$vuetify.lang.current];
     },
   },
 

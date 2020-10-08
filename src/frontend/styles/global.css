@@ -1,8 +1,18 @@
-/* ESTILO DA BARRA DE ROLAGEM */
 html {
   overflow-y: auto;
 }
 
+/* REMOVE SELECT TEXTS FOR USER */
+.remove_select_text {
+  user-select: none;
+  -moz-user-select: none;
+  -webkit-user-select: none;
+  -ms-user-select: none;
+  -o-user-select: none;
+}
+/* END REMOVE SELECT TEXTS FOR USER */
+
+/* ESTILO DA BARRA DE ROLAGEM */
 ::-webkit-scrollbar {
   width: 6px; /*largura da barra de rolagem*/
   height: 6px;

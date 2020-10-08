@@ -1,8 +1,9 @@
 <template>
   <v-navigation-drawer
     disable-resize-watcher
-    class="sidebar_db_container"
+    class="sidebar_db_container remove_select_text"
     v-model="sidebarMenu"
+    draggable="false"
     app
     floating
     :permanent="sidebarMenu"
