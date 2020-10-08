@@ -30,6 +30,14 @@ export default {
     },
   },
 
+  beforeCreate() {
+    if (this.$store.state.actualDatabase) {
+      this.$store.commit('SET_ACTUAL_DATABASE', null);
+      this.$store.commit('SET_ACTUAL_TABLE', null);
+      this.$router.push('/');
+    }
+  },
+
   created() {
     if (navigator.language.includes('pt')) {
       this.$vuetify.lang.current = 'pt';
