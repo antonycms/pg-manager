@@ -1,7 +1,7 @@
 <h1 align="center">PG manager👋</h1>
 
 <p align="center">
-  <img alt="Version" src="https://img.shields.io/badge/version-0.8.0-blue.svg?cacheSeconds=2592000" />
+  <img alt="Version" src="https://img.shields.io/badge/version-0.1.0-blue.svg?cacheSeconds=2592000" />
   <img src="https://img.shields.io/badge/npm-%3E%3D6.14.4-blue.svg" />
   <img src="https://img.shields.io/badge/node-%3E%3D12.17.0-blue.svg" />
   <a href="https://github.com/antonycms/pg-manager#readme" target="_blank">
