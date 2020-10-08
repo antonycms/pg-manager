@@ -2,7 +2,7 @@ const webpack = require('webpack');
 const path = require('path');
 
 const builderOptions = {
-  appId: 'com.softwhere.pdv',
+  appId: 'com.antonycms.pgmanager',
 
   // LINUX BUILD CONFIG
   linux: {
