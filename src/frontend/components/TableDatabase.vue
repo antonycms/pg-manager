@@ -9,6 +9,7 @@
     :hide-default-footer="hideDefaultFooter"
     :disable-pagination="hideDefaultFooter"
     draggable="false"
+    fixed-header
   />
 </template>
 
