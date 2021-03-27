@@ -16,6 +16,7 @@ export const browserWindowConfig = {
   height: 600,
   minWidth: 800,
   minHeight: 600,
+  spellcheck: true,
 
   webPreferences: {
     nodeIntegration: true,

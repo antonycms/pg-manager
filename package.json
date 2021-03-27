@@ -1,6 +1,6 @@
 {
   "name": "pg-manager",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "private": true,
   "description": "Um simples gerenciador de banco de dados postgres",
   "author": {
@@ -23,6 +23,7 @@
   "main": "background.js",
   "dependencies": {
     "core-js": "^3.6.5",
+    "electron-context-menu": "^2.5.0",
     "pg": "^8.3.3",
     "pg-hstore": "^2.3.3",
     "prismjs": "^1.21.0",

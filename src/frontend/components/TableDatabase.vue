@@ -10,6 +10,9 @@
     :disable-pagination="hideDefaultFooter"
     draggable="false"
     fixed-header
+    :footer-props="{
+      'items-per-page-options': [50, 100, 200, 500, 1000],
+    }"
   />
 </template>
 

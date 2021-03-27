@@ -8,6 +8,7 @@ import {
 } from 'electron';
 import { createProtocol } from 'vue-cli-plugin-electron-builder/lib';
 import { browserWindowConfig } from '@/config/electron';
+import contextMenu from 'electron-context-menu';
 
 // remove backend consoles in production build
 if (process.env.NODE_ENV !== 'development') {
@@ -18,6 +19,22 @@ if (process.env.NODE_ENV !== 'development') {
 import '@/backend'; // Load backend;
 
 Menu.setApplicationMenu(null);
+
+contextMenu({
+  showServices: false,
+  showSearchWithGoogle: false,
+  showInspectElement: false,
+  showCopyImage: false,
+  showSaveLinkAs: false,
+  shouldShowMenu: false,
+
+  labels: {
+    copy: 'Copiar',
+    saveImageAs: 'Guardar imagen como…',
+    lookUpSelection: 'Consultar “{selection}”',
+    copyImageAddress: 'Copiar endereço da imagem',
+  },
+});
 
 protocol.registerSchemesAsPrivileged([
   { scheme: 'app', privileges: { secure: true, standard: true } },
@@ -71,10 +88,11 @@ app.on('ready', async () => {
   createWindow();
   win.maximize();
 
-  if (process.env.NODE_ENV === 'development') {
-    globalShortcut.register('f15', () => win.reload());
-    globalShortcut.register('f12', () => win.toggleDevTools());
-  }
+  // cause problems on Gnome (Linux)
+  // if (process.env.NODE_ENV === 'development') {
+  //   globalShortcut.register('f15', () => win.reload());
+  //   globalShortcut.register('f12', () => win.toggleDevTools());
+  // }
 });
 
 // Exit cleanly on request from parent process in development mode.
