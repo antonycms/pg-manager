@@ -6,7 +6,7 @@ const builderOptions = {
 
   // LINUX BUILD CONFIG
   linux: {
-    target: ['AppImage'],
+    target: ['AppImage', 'deb'],
     icon: './icons/icon.png',
   },
 

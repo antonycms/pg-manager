@@ -32,6 +32,8 @@
           :tableData="tableData"
           :loading="loading"
           :search="search"
+          :totalItems="totalItems"
+          @pagination="emitEventPagination"
         />
       </v-tab-item>
       <v-tab-item>
@@ -68,6 +70,9 @@ export default {
     },
     loading: {
       type: Boolean,
+    },
+    totalItems: {
+      type: Number,
     },
   },
 
@@ -112,6 +117,12 @@ export default {
     search: '',
     tab: undefined,
   }),
+
+  methods: {
+    emitEventPagination(event) {
+      this.$emit('pagination', event);
+    },
+  },
 };
 </script>
 

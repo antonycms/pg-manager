@@ -8,7 +8,9 @@
     :loading="loading"
     :hide-default-footer="hideDefaultFooter"
     :disable-pagination="hideDefaultFooter"
+    :server-items-length="totalItems"
     draggable="false"
+    @pagination="emitEventPagination"
     fixed-header
     :footer-props="{
       'items-per-page-options': [50, 100, 200, 500, 1000],
@@ -36,6 +38,18 @@ export default {
     },
     hideDefaultFooter: {
       type: Boolean,
+    },
+    actualPage: {
+      type: Number,
+      default: () => 1,
+    },
+    totalItems: {
+      type: Number,
+    },
+  },
+  methods: {
+    emitEventPagination(event) {
+      this.$emit('pagination', event);
     },
   },
 };

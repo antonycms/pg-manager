@@ -8,6 +8,8 @@
         :tableData="tableData"
         :tableInformation="tableInformation"
         :loading="loadingTableData"
+        :totalItems="totalItems"
+        @pagination="pagination"
       />
     </v-row>
 
@@ -55,6 +57,20 @@ export default {
     SQLEditor,
     JSONEditor,
   },
+  data: () => ({
+    search: '',
+    headersData: [],
+    tableData: [],
+    tableInformation: [],
+
+    sql: '',
+    SqlQueryData: '',
+    loadingTableData: false,
+    tabs: undefined,
+    page: 1,
+    itemsPerPage: 50,
+    totalItems: 0,
+  }),
   computed: {
     actualTable() {
       return this.$store.state.actualTable;
@@ -69,7 +85,26 @@ export default {
     },
   },
   watch: {
-    async actualTable() {
+    actualTable() {
+      this.loadTableData();
+    },
+    page() {
+      this.loadTableData();
+    },
+    itemsPerPage() {
+      this.loadTableData();
+    },
+  },
+
+  methods: {
+    pagination(event) {
+      const { itemsPerPage, page } = event;
+
+      this.page = page;
+      this.itemsPerPage = itemsPerPage;
+    },
+
+    async loadTableData() {
       this.headersData = [];
       this.tableData = [];
       this.tableInformation = [];
@@ -82,16 +117,25 @@ export default {
 
       this.loadingTableData = true;
 
-      const data = await callBackend({
-        eventName: 'service/database/getAllDataInTable',
+      const totalItems = await callBackend({
+        eventName: 'service/database/getTableTotalRows',
         data: {
           schemeName,
           tableName,
         },
       });
 
-      this.loadingTableData = false;
+      const data = await callBackend({
+        eventName: 'service/database/getAllDataInTable',
+        data: {
+          schemeName,
+          tableName,
+          limit: this.itemsPerPage,
+          actualPage: this.page,
+        },
+      });
 
+      this.totalItems = Number(totalItems);
       this.headersData = data.tableColumns.map(column => ({
         value: column.column_name,
         text: column.column_name,
@@ -105,22 +149,10 @@ export default {
       });
       this.tableData = data.data;
       this.sql = data.sql;
+
+      this.loadingTableData = false;
     },
-  },
 
-  data: () => ({
-    search: '',
-    headersData: [],
-    tableData: [],
-    tableInformation: [],
-
-    sql: '',
-    SqlQueryData: '',
-    loadingTableData: false,
-    tabs: undefined,
-  }),
-
-  methods: {
     async handleRunSQL() {
       const data = await callBackend({
         eventName: 'service/database/executeQuery',
