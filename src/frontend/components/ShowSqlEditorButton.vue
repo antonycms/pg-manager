@@ -14,8 +14,15 @@ export default {
   }),
 
   watch: {
-    showSQLEditor() {
-      this.$store.commit('SET_SHOW_SQL_EDITOR', this.showSQLEditor);
+    showSQLEditor(value) {
+      if (value !== this.show) {
+        this.$store.commit('SET_SHOW_SQL_EDITOR', this.showSQLEditor);
+      }
+    },
+    show(value) {
+      if (value !== this.showSQLEditor) {
+        this.showSQLEditor = value;
+      }
     },
   },
 

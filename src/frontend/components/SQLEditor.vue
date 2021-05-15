@@ -4,6 +4,7 @@
     v-model="code"
     :highlight="highlighter"
     line-numbers
+    :readonly="readonly"
   ></prism-editor>
 </template>
 
@@ -29,6 +30,9 @@ export default {
   props: {
     sql: {
       type: String,
+    },
+    readonly: {
+      type: Boolean,
     },
   },
   watch: {

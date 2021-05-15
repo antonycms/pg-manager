@@ -1,6 +1,6 @@
 <template>
   <v-footer inset padless app>
-    <ShowSqlEditorButton v-if="actualDatabase" />
+    <ShowSqlEditorButton v-if="actualDatabase && activeTabTabDatabase" />
 
     <v-col class="text-center remove_select_text" cols="12">
       <strong>PG Manager</strong> by
@@ -27,6 +27,9 @@ export default {
   computed: {
     actualDatabase() {
       return this.$store.state.actualDatabase;
+    },
+    activeTabTabDatabase() {
+      return this.$store.state.activeTab === 'database';
     },
   },
 };

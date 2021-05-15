@@ -1,47 +1,79 @@
 <template>
-  <v-container class="pb-0 manage_database_container">
-    <v-row justify="center" class="row_table_database">
-      <ContentManageDatabase
-        class="manage_database_table"
-        :search="search"
-        :headersData="headersData"
-        :tableData="tableData"
-        :tableInformation="tableInformation"
-        :loading="loadingTableData"
-        :totalItems="totalItems"
-        @pagination="pagination"
-      />
-    </v-row>
+  <div id="container_manage_content">
+    <v-tabs height="45px" v-model="tab">
+      <v-tab>Tabela</v-tab>
+      <v-tab>Editor SQL</v-tab>
+    </v-tabs>
 
-    <v-row class="container_sql_editor_md" v-show="showSQLEditor">
-      <v-col cols="12" sm="6" md="6" lg="6" class="pa-0">
-        <div class="pa-0 bottom_containers">
-          <SQLEditor :sql="sql" @sql_textarea_data="value => (sql = value)" />
+    <v-tabs-items v-model="tab">
+      <v-tab-item>
+        <v-container v-show="tab == 0" class="pb-0 manage_database_container">
+          <v-row justify="center" class="row_table_database">
+            <ContentManageDatabase
+              class="manage_database_table"
+              :search="search"
+              :headersData="headersData"
+              :tableData="tableData"
+              :tableInformation="tableInformation"
+              :loading="loadingTableData"
+              :totalItems="totalItems"
+              @pagination="pagination"
+            />
+          </v-row>
 
-          <v-card rounded="0" elevation="0" class="menu_sql_editor">
-            <button class="btn_run_sql" @click="handleRunSQL">
-              <v-icon>mdi-play</v-icon>
-            </button>
+          <v-row class="container_sql_editor_md" v-show="showSQLEditor">
+            <v-col cols="12" sm="6" md="6" lg="6" class="pa-0">
+              <div class="pa-0 bottom_containers">
+                <SQLEditor
+                  :sql="sql"
+                  @sql_textarea_data="value => (sql = value)"
+                  readonly
+                />
+
+                <v-card rounded="0" elevation="0" class="menu_sql_editor" />
+              </div>
+            </v-col>
+
+            <v-col
+              cols="12"
+              sm="6"
+              md="6"
+              lg="6"
+              class="pa-0 bottom_containers"
+            >
+              <JSONEditor :json="SqlQueryData" />
+            </v-col>
+
+            <v-tooltip top>
+              <template v-slot:activator="{ on, attrs }">
+                <div class="btn_copy_container">
+                  <button v-bind="attrs" v-on="on" v-clipboard="SqlQueryData">
+                    <v-icon>mdi-content-copy</v-icon>
+                  </button>
+                </div>
+              </template>
+              <span>Copiar Tudo</span>
+            </v-tooltip>
+          </v-row>
+        </v-container>
+      </v-tab-item>
+
+      <v-tab-item>
+        <div v-show="tab == 1" class="sql_database_container">
+          <v-card width="100%" max-width="90%" height="60%">
+            <SQLEditor
+              :sql="editorTabSql"
+              @sql_textarea_data="value => (editorTabSql = value)"
+            />
+          </v-card>
+
+          <v-card class="mt-4" width="100%" max-width="90%" height="40%">
+            <p>Resultados</p>
           </v-card>
         </div>
-      </v-col>
-
-      <v-col cols="12" sm="6" md="6" lg="6" class="pa-0 bottom_containers">
-        <JSONEditor :json="SqlQueryData" />
-      </v-col>
-
-      <v-tooltip top>
-        <template v-slot:activator="{ on, attrs }">
-          <div class="btn_copy_container">
-            <button v-bind="attrs" v-on="on" v-clipboard="SqlQueryData">
-              <v-icon>mdi-content-copy</v-icon>
-            </button>
-          </div>
-        </template>
-        <span>Copiar Tudo</span>
-      </v-tooltip>
-    </v-row>
-  </v-container>
+      </v-tab-item>
+    </v-tabs-items>
+  </div>
 </template>
 
 <script>
@@ -65,11 +97,13 @@ export default {
 
     sql: '',
     SqlQueryData: '',
+    editorTabSql: '',
     loadingTableData: false,
     tabs: undefined,
     page: 1,
     itemsPerPage: 50,
     totalItems: 0,
+    tab: null,
   }),
   computed: {
     actualTable() {
@@ -93,6 +127,20 @@ export default {
     },
     itemsPerPage() {
       this.loadTableData();
+    },
+    tab(tabIndex) {
+      const tabs = {
+        0: 'database',
+        1: 'sql_editor',
+      };
+
+      const activeTab = tabs[tabIndex];
+
+      if (activeTab === 'sql_editor') {
+        this.hideSQLEditor();
+      }
+
+      this.$store.commit('SET_ACTIVE_TAB', activeTab);
     },
   },
 
@@ -149,6 +197,7 @@ export default {
       });
       this.tableData = data.data;
       this.sql = data.sql;
+      this.SqlQueryData = JSON.stringify(data.data, null, 2);
 
       this.loadingTableData = false;
     },
@@ -161,11 +210,33 @@ export default {
 
       this.SqlQueryData = JSON.stringify(data, null, 2);
     },
+
+    hideSQLEditor() {
+      this.$store.commit('SET_SHOW_SQL_EDITOR', false);
+    },
   },
 };
 </script>
 
 <style scoped>
+#container_manage_content {
+  display: flex;
+  flex-direction: column;
+
+  width: 100%;
+  height: 100%;
+}
+
+#container_manage_content .v-tabs {
+  flex: unset;
+}
+
+#container_manage_content .v-window.v-item-group.v-tabs-items,
+#container_manage_content .v-window__container,
+#container_manage_content .v-window-item.v-window-item--active {
+  height: 100%;
+}
+
 .manage_database_container {
   max-width: 90%;
   display: flex;
@@ -174,10 +245,20 @@ export default {
   max-height: calc(100vh - 64px - 48px);
 }
 
+.sql_database_container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 97.5%;
+  margin-top: 12px;
+  max-height: calc(100vh - 64px - 48px);
+}
+
 .row_table_database {
   /* overflow: auto; */
   flex: 1;
-  max-height: 100%;
+  height: 1px;
   overflow: hidden;
   margin: auto -16px;
   margin-bottom: 10px;

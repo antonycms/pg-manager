@@ -118,6 +118,7 @@ class DatabaseService {
     tableName = '',
     limit = 50,
     actualPage = 1,
+    orderBy,
   }) {
     const references = await this._getTableReferences({
       schemeName,
@@ -142,7 +143,11 @@ class DatabaseService {
 
     const offset = limit * (actualPage - 1);
 
-    const sql = `SELECT * FROM "${schemeName}"."${tableName}" LIMIT ${limit} OFFSET ${offset}`;
+    const sql = `
+      SELECT * FROM "${schemeName}"."${tableName}" ${
+      orderBy ? `ORDER BY ${orderBy} ` : ''
+    } LIMIT ${limit} OFFSET ${offset};
+    `;
     const data = await this.core.connection.query(sql, {
       type: QueryTypes.SELECT,
     });

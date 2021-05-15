@@ -13,7 +13,7 @@
     @pagination="emitEventPagination"
     fixed-header
     :footer-props="{
-      'items-per-page-options': [50, 100, 200, 500, 1000],
+      'items-per-page-options': [50, 100, 200, 500],
     }"
   />
 </template>

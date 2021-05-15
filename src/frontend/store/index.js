@@ -16,6 +16,7 @@ export default new Vuex.Store({
     databases: [],
     actualDatabase: null,
     actualTable: null,
+    activeTab: 'database',
     active_theme: 'LIGHT',
     showSqlEditor: false,
   },
@@ -28,6 +29,9 @@ export default new Vuex.Store({
     },
     SET_ACTUAL_TABLE(state, data) {
       state.actualTable = data;
+    },
+    SET_ACTIVE_TAB(state, data) {
+      state.activeTab = data;
     },
     SET_ACTIVE_THEME(state, dark) {
       if (dark) {
