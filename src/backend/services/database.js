@@ -119,6 +119,7 @@ class DatabaseService {
     limit = 50,
     actualPage = 1,
     orderBy,
+    where,
   }) {
     const references = await this._getTableReferences({
       schemeName,
@@ -145,19 +146,26 @@ class DatabaseService {
 
     const sql = `
       SELECT * FROM "${schemeName}"."${tableName}" ${
-      orderBy ? `ORDER BY ${orderBy} ` : ''
+      where ? `WHERE ${where}` : ''
+    } ${
+      orderBy ? `ORDER BY ${orderBy.columnName} ${orderBy.sortType}` : ''
     } LIMIT ${limit} OFFSET ${offset};
     `;
-    const data = await this.core.connection.query(sql, {
-      type: QueryTypes.SELECT,
-    });
 
-    return {
-      tableColumns,
-      data,
-      references,
-      sql,
-    };
+    try {
+      const data = await this.core.connection.query(sql, {
+        type: QueryTypes.SELECT,
+      });
+
+      return {
+        tableColumns,
+        data,
+        references,
+        sql,
+      };
+    } catch (error) {
+      return { failed: true, error, sql };
+    }
   }
 
   async getTableTotalRows({ schemeName = '', tableName = '' }) {

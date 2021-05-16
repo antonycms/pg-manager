@@ -14,14 +14,32 @@
 
       <v-spacer />
 
-      <v-col v-show="!tab" class="pa-0" cols="12" sm="4" md="4" lg="4 ">
+      <v-col
+        style="display: flex; align-items: center;"
+        v-show="!tab"
+        class="pa-0"
+        cols="12"
+        sm="4"
+        md="4"
+        lg="4 "
+      >
         <v-text-field
           v-model="search"
-          append-icon="mdi-magnify"
           :label="language.filterText"
-          single-line
           hide-details
+          outlined
+          dense
         />
+
+        <v-btn
+          class="ml-1"
+          elevation="0"
+          height="40px"
+          color="primary"
+          @click="emitEventSearch"
+        >
+          <v-icon>mdi-magnify</v-icon>
+        </v-btn>
       </v-col>
     </v-card-title>
 
@@ -31,9 +49,9 @@
           :headers="headersData"
           :tableData="tableData"
           :loading="loading"
-          :search="search"
           :totalItems="totalItems"
           @pagination="emitEventPagination"
+          @sort="emitEventSortBy"
         />
       </v-tab-item>
       <v-tab-item>
@@ -121,6 +139,12 @@ export default {
   methods: {
     emitEventPagination(event) {
       this.$emit('pagination', event);
+    },
+    emitEventSortBy(event) {
+      this.$emit('sort', event);
+    },
+    emitEventSearch() {
+      this.$emit('search', this.search);
     },
   },
 };

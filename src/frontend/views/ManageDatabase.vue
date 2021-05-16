@@ -11,13 +11,14 @@
           <v-row justify="center" class="row_table_database">
             <ContentManageDatabase
               class="manage_database_table"
-              :search="search"
+              @search="event => (search = event)"
               :headersData="headersData"
               :tableData="tableData"
               :tableInformation="tableInformation"
               :loading="loadingTableData"
               :totalItems="totalItems"
               @pagination="pagination"
+              @sort="sortTableDatabase"
             />
           </v-row>
 
@@ -103,6 +104,10 @@ export default {
     page: 1,
     itemsPerPage: 50,
     totalItems: 0,
+    sortTable: {
+      columnName: null,
+      sortType: null,
+    },
     tab: null,
   }),
   computed: {
@@ -128,6 +133,12 @@ export default {
     itemsPerPage() {
       this.loadTableData();
     },
+    sortTable() {
+      this.loadTableData();
+    },
+    search() {
+      this.loadTableData();
+    },
     tab(tabIndex) {
       const tabs = {
         0: 'database',
@@ -150,6 +161,10 @@ export default {
 
       this.page = page;
       this.itemsPerPage = itemsPerPage;
+    },
+
+    sortTableDatabase(event) {
+      this.sortTable = event;
     },
 
     async loadTableData() {
@@ -180,8 +195,19 @@ export default {
           tableName,
           limit: this.itemsPerPage,
           actualPage: this.page,
+          orderBy: this.sortTable.columnName ? this.sortTable : null,
+          where: this.search,
         },
       });
+
+      if (data.failed) {
+        this.loadingTableData = false;
+        this.SqlQueryData = '';
+        this.sql = `SQL Inválido: ${data.sql.trim()} \n\n"${
+          data.error.message
+        }"`;
+        return;
+      }
 
       this.totalItems = Number(totalItems);
       this.headersData = data.tableColumns.map(column => ({
@@ -196,7 +222,7 @@ export default {
         return column;
       });
       this.tableData = data.data;
-      this.sql = data.sql;
+      this.sql = data.sql.trim();
       this.SqlQueryData = JSON.stringify(data.data, null, 2);
 
       this.loadingTableData = false;

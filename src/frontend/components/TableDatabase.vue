@@ -11,6 +11,7 @@
     :server-items-length="totalItems"
     draggable="false"
     @pagination="emitEventPagination"
+    @update:options="emitEventSortBy"
     fixed-header
     :footer-props="{
       'items-per-page-options': [50, 100, 200, 500],
@@ -50,6 +51,27 @@ export default {
   methods: {
     emitEventPagination(event) {
       this.$emit('pagination', event);
+    },
+    emitEventSortBy(event) {
+      if (!this.totalItems || !this.actualPage) return;
+
+      const { sortBy, sortDesc } = event;
+      const sortTypes = { true: 'DESC', false: 'ASC' };
+
+      const eventResponse = {
+        columnName: null,
+        sortType: null,
+      };
+
+      if (sortBy && sortBy.length) {
+        const [columnName] = sortBy;
+        const sortType = sortTypes[`${sortDesc}`];
+
+        eventResponse.columnName = columnName;
+        eventResponse.sortType = sortType;
+      }
+
+      this.$emit('sort', eventResponse);
     },
   },
 };
