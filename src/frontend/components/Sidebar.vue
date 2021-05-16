@@ -1,7 +1,6 @@
 <template>
   <v-navigation-drawer
     width="auto"
-    disable-resize-watcher
     class="sidebar_db_container remove_select_text"
     v-model="sidebarMenu"
     draggable="false"

@@ -10,7 +10,7 @@
         width="40"
       /> -->
 
-      <span>
+      <span class="remove_select_text">
         PG Manager
       </span>
     </div>
