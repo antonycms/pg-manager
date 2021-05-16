@@ -3,10 +3,10 @@
     <v-card-title class="pl-0 pt-0 remove_select_text">
       <v-col class="pa-0" cols="12" sm="8" md="8" lg="8">
         <v-tabs v-model="tab">
-          <v-tab>
+          <v-tab style="font-size: 12px;">
             {{ tableTabs.dataTableText }}
           </v-tab>
-          <v-tab>
+          <v-tab style="font-size: 12px;">
             {{ tableTabs.informationTableText }}
           </v-tab>
         </v-tabs>

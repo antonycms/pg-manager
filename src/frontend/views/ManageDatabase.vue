@@ -1,8 +1,12 @@
 <template>
   <div id="container_manage_content">
-    <v-tabs height="45px" v-model="tab">
-      <v-tab>Tabela</v-tab>
-      <v-tab>Editor SQL</v-tab>
+    <v-tabs
+      style="border-bottom: 1px solid var(--black-white)"
+      height="45px"
+      v-model="tab"
+    >
+      <v-tab style="font-size: 12px;">Tabela</v-tab>
+      <v-tab style="font-size: 12px;">Editor SQL</v-tab>
     </v-tabs>
 
     <v-tabs-items v-model="tab">

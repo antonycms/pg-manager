@@ -36,88 +36,95 @@
     </v-app-bar>
 
     <Sidebar :openSidebar="openSidebar">
-      <div class="sidebar_content">
-        <v-card elevation="1">
-          <v-card-title>
-            <v-icon>mdi-database</v-icon>
-            <span class="sidebar_title remove_select_text">{{ dbName }}</span>
+      <vue-resizable
+        width="269px"
+        :maxWidth="560"
+        :minWidth="269"
+        style="overflow: hidden;"
+      >
+        <div class="sidebar_content">
+          <v-card elevation="1">
+            <v-card-title>
+              <v-icon>mdi-database</v-icon>
+              <span class="sidebar_title remove_select_text">{{ dbName }}</span>
 
-            <v-spacer />
+              <v-spacer />
 
-            <v-tooltip bottom>
-              <template v-slot:activator="{ on, attrs }">
-                <v-btn
-                  v-bind="attrs"
-                  v-on="on"
-                  @click="loadSchemasWithTables"
-                  height="26"
-                  width="26"
-                  text
-                >
-                  <v-progress-circular
-                    size="18"
-                    width="2"
-                    indeterminate
-                    v-if="loadingData"
-                  ></v-progress-circular>
+              <v-tooltip bottom>
+                <template v-slot:activator="{ on, attrs }">
+                  <v-btn
+                    v-bind="attrs"
+                    v-on="on"
+                    @click="loadSchemasWithTables"
+                    height="26"
+                    width="26"
+                    text
+                  >
+                    <v-progress-circular
+                      size="18"
+                      width="2"
+                      indeterminate
+                      v-if="loadingData"
+                    ></v-progress-circular>
 
-                  <v-icon v-else>mdi-update</v-icon>
-                </v-btn>
-              </template>
+                    <v-icon v-else>mdi-update</v-icon>
+                  </v-btn>
+                </template>
 
-              <span>{{ language.refresh }}</span>
-            </v-tooltip>
-          </v-card-title>
-        </v-card>
+                <span>{{ language.refresh }}</span>
+              </v-tooltip>
+            </v-card-title>
+          </v-card>
 
-        <v-sheet class="pa-2 pt-4 primary">
-          <v-text-field
-            v-model="searchTableName"
-            :label="language.searchText"
-            dark
-            flat
-            solo-inverted
-            hide-details
-            clearable
-            clear-icon="mdi-close-circle-outline"
-          ></v-text-field>
-          <v-checkbox
-            v-model="tableSearchcaseSensitive"
-            dark
-            hide-details
-            :label="language.sensitiveSearch"
-            color="white"
-          ></v-checkbox>
-        </v-sheet>
+          <v-sheet class="pa-2 pt-4 primary">
+            <v-text-field
+              v-model="searchTableName"
+              :label="language.searchText"
+              dark
+              flat
+              solo-inverted
+              hide-details
+              clearable
+              clear-icon="mdi-close-circle-outline"
+            ></v-text-field>
+            <v-checkbox
+              v-model="tableSearchcaseSensitive"
+              dark
+              hide-details
+              :label="language.sensitiveSearch"
+              color="white"
+            ></v-checkbox>
+          </v-sheet>
 
-        <v-treeview
-          :load-children="loadSchemasWithTables"
-          :items="items"
-          :active.sync="activeSchema"
-          :search="searchTableName"
-          :filter="filterSidebar"
-          activatable
-          item-key="name"
-          open-on-click
-          return-object
-          rounded
-          class="treeview_database"
-        >
-          <template v-slot:prepend="{ item, open }">
-            <div>
-              <v-icon v-if="!item.schema && !item.id">
-                {{ open ? 'mdi-folder-open' : 'mdi-folder' }}
-              </v-icon>
-              <v-icon v-if="!item.schema && item.id">
-                mdi-folder-table-outline
-              </v-icon>
-              <v-icon v-if="item.schema">
-                mdi-table
-              </v-icon>
-            </div>
-          </template>
-        </v-treeview>
-      </div>
+          <v-treeview
+            :load-children="loadSchemasWithTables"
+            :items="items"
+            :active.sync="activeSchema"
+            :search="searchTableName"
+            :filter="filterSidebar"
+            activatable
+            item-key="name"
+            open-on-click
+            return-object
+            rounded
+            class="treeview_database"
+          >
+            <template v-slot:prepend="{ item, open }">
+              <div>
+                <v-icon v-if="!item.schema && !item.id">
+                  {{ open ? 'mdi-folder-open' : 'mdi-folder' }}
+                </v-icon>
+                <v-icon v-if="!item.schema && item.id">
+                  mdi-folder-table-outline
+                </v-icon>
+                <v-icon v-if="item.schema">
+                  mdi-table
+                </v-icon>
+              </div>
+            </template>
+          </v-treeview>
+        </div>
+      </vue-resizable>
     </Sidebar>
   </fragment>
 </template>
@@ -125,11 +132,13 @@
 <script>
 import Sidebar from '@/frontend/components/Sidebar';
 import callBackend from '../utils/callBackend';
+import VueResizable from 'vue-resizable';
 
 export default {
   name: 'HeaderManageDatabase',
   components: {
     Sidebar,
+    VueResizable,
   },
 
   computed: {
