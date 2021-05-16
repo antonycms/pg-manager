@@ -38,7 +38,6 @@ export default {
       this.sidebarMenu = this.openSidebar;
     },
     'navigation.width'(value) {
-      console.log(value);
       this.$store.commit('SET_WIDTH_SIDEBAR', value);
     },
   },
