@@ -1,14 +1,14 @@
 <template>
   <v-app-bar elevation="0" app white>
     <div class="d-flex align-center">
-      <v-img
+      <!-- <v-img
         alt="Vuetify Logo"
         class="shrink mr-2"
         contain
         src="@/frontend/assets/logo.svg"
         transition="scale-transition"
         width="40"
-      />
+      /> -->
 
       <span>
         PG Manager

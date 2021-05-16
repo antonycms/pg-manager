@@ -11,7 +11,10 @@
 
     <v-tabs-items v-model="tab">
       <v-tab-item>
-        <v-container v-show="tab == 0" class="pb-0 manage_database_container">
+        <v-container
+          v-show="tab == 0 && actualTable"
+          class="pb-0 manage_database_container"
+        >
           <v-row justify="center" class="row_table_database">
             <ContentManageDatabase
               class="manage_database_table"

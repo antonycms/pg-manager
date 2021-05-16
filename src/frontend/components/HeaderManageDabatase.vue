@@ -14,14 +14,14 @@
           <v-icon>mdi-menu</v-icon>
         </v-btn>
 
-        <v-img
+        <!-- <v-img
           alt="Vuetify Logo"
           class="shrink mr-2"
           contain
           src="@/frontend/assets/logo.svg"
           transition="scale-transition"
           width="40"
-        />
+        /> -->
 
         <span>
           PG Manager
@@ -217,6 +217,7 @@ export default {
       });
 
       this.$store.commit('SET_ACTUAL_DATABASE', null);
+      this.$store.commit('SET_ACTUAL_TABLE', null);
       this.$router.push('/');
     },
 
