@@ -19,6 +19,7 @@ export default new Vuex.Store({
     activeTab: 'database',
     active_theme: 'LIGHT',
     showSqlEditor: false,
+    widthSidebar: 269,
   },
   mutations: {
     SET_DATABASES(state, data) {
@@ -43,6 +44,9 @@ export default new Vuex.Store({
     },
     SET_SHOW_SQL_EDITOR(state, data) {
       state.showSqlEditor = data;
+    },
+    SET_WIDTH_SIDEBAR(state, data) {
+      state.widthSidebar = data;
     },
   },
   actions: {

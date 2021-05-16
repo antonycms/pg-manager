@@ -9646,11 +9646,6 @@ vue-prism-editor@^1.2.2:
   resolved "https://registry.yarnpkg.com/vue-prism-editor/-/vue-prism-editor-1.2.2.tgz#023cfd4329848f191aac851f2f5e6c7a8c2e059f"
   integrity sha512-Lq2VgVygTx3Whn/tC8gD4m1ajA4lzSyCTqPLZA1Dq/ErbBaZA93FWRblwCoDR7AD2nXhGWuiTzb5ih3guzB7DA==
 
-vue-resizable@^2.0.5:
-  version "2.0.5"
-  resolved "https://registry.yarnpkg.com/vue-resizable/-/vue-resizable-2.0.5.tgz#7e7fdae19e8cedbd332758d8886b95f445802653"
-  integrity sha512-AasULoGLeg87VFS07QpoR8q+U0saSlLVBhZy5wPKBl9L7YhmHVJ5Vng8mFpfnBbF2B7SujwPRTcRooz7/ntpqA==
-
 vue-router@^3.2.0:
   version "3.4.5"
   resolved "https://registry.yarnpkg.com/vue-router/-/vue-router-3.4.5.tgz#d396ec037b35931bdd1e9b7edd86f9788dc15175"
