@@ -157,6 +157,24 @@ class DatabaseService {
         type: QueryTypes.SELECT,
       });
 
+      const columnsToParser = tableColumns.filter(column => {
+        return (
+          column.data_type.includes('json') ||
+          column.data_type.includes('timestamp')
+        );
+      });
+
+      if (columnsToParser.length) {
+        data.forEach(item => {
+          columnsToParser.forEach(
+            column =>
+              (item[column.column_name] = JSON.stringify(
+                item[column.column_name],
+              )),
+          );
+        });
+      }
+
       return {
         tableColumns,
         data,
